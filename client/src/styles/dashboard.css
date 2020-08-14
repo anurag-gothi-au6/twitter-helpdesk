@@ -1,0 +1,44 @@
+.gray{
+    color: #8a8888;
+    font-weight: bolder;
+}
+.right{
+    float: right;
+}
+.dark{
+    font-weight: bolder;
+    color:black;
+    margin-left:0;
+    display:inline;
+}
+
+*{
+    margin:0;
+    padding:0;
+}
+.inline{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 3rem;
+    margin-top: 1rem;
+}
+.margin-2{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    margin-right:3rem;
+}
+.chatHeader{
+    display: flex;
+    align-items: center;
+    padding:10px;
+    background-color:white;
+
+}
+.chatImage{
+    margin-left:10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    height:30px;
+    width:30px;
+}
