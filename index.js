@@ -15,15 +15,16 @@ const session = require("express-session")
 dotenv.config();
 var whitelist = ["http://127.0.0.1:3000", "https://twitter-hd-anurag.herokuapp.com/"];
 var corsOptions = {
-  exposedHeaders: ["x-auth-token"],
-  origin: function (origin, callback) {
-    console.log(origin)
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
+   exposedHeaders: ["x-auth-token"]
+  //,
+  // origin: function (origin, callback) {
+  //   console.log(origin)
+  //   if (whitelist.indexOf(origin) !== -1) {
+  //     callback(null, true);
+  //   } else {
+  //     callback(new Error("Not allowed by CORS"));
+  //   }
+  // }
 };
 
 
