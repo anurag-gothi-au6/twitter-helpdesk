@@ -196,7 +196,7 @@ class DashBoard extends Component {
     window.localStorage.clear();
     this.props.changeLoginState(false, null, "");
     setTimeout(() => {
-      this.props.history.push("/");
+      this.props.history.push("/login");
     }, 100);
   };
 
