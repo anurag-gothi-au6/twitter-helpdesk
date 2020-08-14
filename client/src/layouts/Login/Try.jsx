@@ -23,7 +23,7 @@ class Login extends Component {
 
   handleChange = async (e) => {
     await this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state)
+    console.log(apiUrl)
     const {
       name,
       password,
@@ -79,25 +79,45 @@ class Login extends Component {
   login = async () => {
     try {
       this.setState({ isLoading: true });
+      console.log(apiUrl)
       const {email,password} = this.state
       const res = await axios.post(`${apiUrl}/api/auth/enterprise/login`, {
         email: email,
         password: password,
       });
-      console.log(res);
-      if (!res.headers["x-auth-token"]) {
-        window.alert("Ask your enterprise admin to add twitter account");
-        this.props.changeLoginState(false, null, "");
-        return;
-      } else if (res.headers["x-auth-token"]) {
-        this.props.helpdeskUser(res.data.user);
-        this.props.changeLoginState(true, null, res.headers["x-auth-token"]);
-        this.props.history.push("/dashboard");
-        return;
-      } else if (res.data) {
-        this.props.helpdeskUser(res.data.user);
-        this.props.history.push("/");
+      console.log(res.data.user);
+      if(!res.data.user.isAdmin){
+        if (!res.headers["x-auth-token"]) {
+            window.alert("Ask your enterprise admin to add twitter account");
+          this.props.changeLoginState(false, null, "");
+          return;
+        } else if (res.headers["x-auth-token"]) {
+          this.props.helpdeskUser(res.data.user);
+          this.props.changeLoginState(true, null, res.headers["x-auth-token"]);
+          this.props.history.push("/dashboard");
+          return;
+        } else if (res.data) {
+          this.props.helpdeskUser(res.data.user);
+          this.props.history.push("/");
+        }
       }
+      else if(res.data.user.isAdmin){
+        if (!res.headers["x-auth-token"]) {
+          console.log(res.data)
+          this.props.helpdeskUser(res.data.user);
+          this.props.history.push('/')
+            return
+        } else if (res.headers["x-auth-token"]) {
+          this.props.helpdeskUser(res.data.user);
+          this.props.changeLoginState(true, null, res.headers["x-auth-token"]);
+          this.props.history.push("/dashboard");
+          return;
+        } else if (res.data) {
+          this.props.helpdeskUser(res.data.user);
+          this.props.history.push("/");
+        }
+      }
+      
     } catch (error) {
       console.log(error.message);
       window.alert("invalid credentials");
@@ -107,11 +127,12 @@ class Login extends Component {
     try {
       this.setState({isLoading:true});
       const {email,password,name, enterpriseName} = this.state
+      console.log(password)
 
       const res = await axios.post(`${apiUrl}/api/auth/enterprise/register`, {
         name: name,
         email: email,
-        password: email,
+        password: password,
         enterpriseName: enterpriseName,
       });
       if (res.data) {

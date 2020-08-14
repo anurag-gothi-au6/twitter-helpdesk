@@ -11,6 +11,7 @@ import TweetList from "../../components/Tweets/TweetList";
 import ChatList from "../../components/Chats/ChatList";
 import InfoColumn from "../../components/Information/InfoColumn";
 import { updateUser, changeLoginState } from "../../redux/actions/userActions";
+import axios from "axios";
 class DashBoard extends Component {
   constructor(props) {
     super(props);
@@ -195,6 +196,7 @@ class DashBoard extends Component {
   logout = async () => {
     window.localStorage.clear();
     this.props.changeLoginState(false, null, "");
+    await axios.delete(`${apiUrl}/api/auth/logout`)
     setTimeout(() => {
       this.props.history.push("/login");
     }, 100);

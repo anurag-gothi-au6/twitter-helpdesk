@@ -26,11 +26,18 @@ module.exports = {
         throw new Error('Enterprise Already Exists')
       }
       const enterprise = await Enterprise.create({ enterpriseName: enterpriseName })
+      console.log('password', password)
       const newUser = await User.create({ name: name, email: email, password: password, enterprise: enterprise._id, isAdmin: true })
-      // const accessToken = sharedFunctions.accessToken({email: newUser.email,enterprise:newUser.enterprise});
-      // const refreshToken = sharedFunctions.refreshToken({email: newUser.email,enterprise:newUser.enterprise,isAdmin:newUser.isAdmin})
-      // req.session.accessToken = accessToken;
-      // req.session.refreshToken = refreshToken;
+      const accessToken = sharedFunctions.accessToken({ email: newUser.email, enterprise: newUser.enterprise });
+      const refreshToken = sharedFunctions.refreshToken({ email: newUser.email, enterprise: newUser.enterprise, isAdmin: newUser.isAdmin })
+      res.cookie('accessToken', accessToken,
+        {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
+      res.cookie('refreshToken', refreshToken,
+        {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
       res.status(200).json({ user: newUser })
     }
     catch (err) {
@@ -41,11 +48,18 @@ module.exports = {
     try {
       console.log(req.body)
       const user = await User.findByEmailAndPassword(req.body.email, req.body.password)
-      // const accessToken = sharedFunctions.accessToken({email: user.email,enterprise:user.enterprise});
-      // const refreshToken = sharedFunctions.refreshToken({email: user.email,enterprise:user.enterprise,isAdmin:user.isAdmin})
-      // req.session.accessToken = accessToken;
-      // req.session.refreshToken = refreshToken;
-      const userTobeSent = await User.findOne({_id:user._id})
+      console.log(user)
+      const accessToken = sharedFunctions.accessToken({ email: user.email, enterprise: user.enterprise });
+      const refreshToken = sharedFunctions.refreshToken({ email: user.email, enterprise: user.enterprise, isAdmin: user.isAdmin })
+      res.cookie('accessToken', accessToken,
+        {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
+      res.cookie('refreshToken', refreshToken,
+        {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
+      const userTobeSent = await User.findOne({ _id: user._id })
       if (user) {
         if (user.enterprise.accessToken === null) {
           if (user.admin === true) {
@@ -89,7 +103,7 @@ module.exports = {
         numbers: true
       });
       const newUser = await User.create({ name: name, email: email, password: password, enterprise: checkEnterprise._id, isAdmin: false })
-      Mailer(name, email, password,checkEnterprise.enterpriseName)
+      Mailer(name, email, password, checkEnterprise.enterpriseName)
       res.json({ status: 'user created' })
     } catch (error) {
       console.log(error)
@@ -172,7 +186,7 @@ module.exports = {
       },
       (err, r, body) => {
         try {
-          console.log(err,body)
+          console.log(err, body)
           if (err) {
             console.log('errorData')
             return res.send(500, { message: err.message });
@@ -186,5 +200,10 @@ module.exports = {
         }
       }
     );
+  },
+  logout: async (req, res) => {
+    res.cookie('accessToken','' ,{ maxAge: 0 })
+    res.cookie('refreshToken','' ,{ maxAge: 0 })
+    res.json({ response: 'loggedOut' })
   }
 };

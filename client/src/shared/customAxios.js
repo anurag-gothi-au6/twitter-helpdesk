@@ -1,6 +1,9 @@
 import axios from "axios";
-
+import { createHashHistory } from 'history' // or createBrowserHistory
 import { apiUrl } from "../shared/vars";
+
+const history = createHashHistory()
+
 
 const ApiErrorCode = {
   INVALID_SHAPE: "INVALID_SHAPE",
@@ -35,13 +38,20 @@ class CustomApiClient {
           "x-auth-token": token
         }
       });
+      if(r.data.error){
+        localStorage.removeItem('user')
+        localStorage.removeItem('rp_token')
+        history.push('/login')
+        return
+      }
+      console.log(r.data)
 
       console.log(`%c[${r.status}] <--`, "color: green", r.data);
 
       return r.data;
     } catch (err) {
-      console.error(err);
-      throw new Error(err);
+      console.log(err)
+      throw new Error(err)
     }
   }
 
@@ -59,6 +69,12 @@ class CustomApiClient {
         }
         //withCredentials: true
       });
+      if(resp.data.error){
+        localStorage.removeItem('user')
+        localStorage.removeItem('rp_token')
+        history.push('/login')
+        return
+      }
       console.log('resp header',resp)
       console.log(`%c[${resp.status}] <--`, "color: green", resp);
 
@@ -80,8 +96,7 @@ class CustomApiClient {
           message: errorData.message.message
         };
       }
-
-      throw new Error(err);
+      throw new Error(err)
     }
   }
 }

@@ -38,16 +38,14 @@ userSchema.statics.findByEmailAndPassword = async (email, password) => {
     try {
         console.log(email,password)
         const user = await User.findOne({ email: email }).populate('enterprise');
+        console.log(user)
         if (!user) throw new Error("Invalid Credentials");
         if (process.env.NODE_ENV != 'test') {
             console.log('password',password)
             const isMatched = await bcrypt.compare(password, user.password);
+            console.log(user.password)
+            console.log(isMatched)
             if (!isMatched) throw new Error("Invalid Credentials");
-        }
-        else if (process.env.NODE_ENV == 'test') {
-            if (user.password != password) {
-                throw new Error("Invalid Credentials");
-            }
         }
         return user;
     } catch (err) {

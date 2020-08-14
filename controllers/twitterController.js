@@ -23,7 +23,6 @@ module.exports = {
     try {
       const { user } = req;
       const cachedTweet = await UserReply.find({ enterprise: req.params.enterpriseId }).populate('replier')
-      console.log(cachedTweet)
       if (cachedTweet.length > 0) {
         var { data } = await twitter(
           user.oauth_token,
@@ -161,7 +160,6 @@ module.exports = {
         enterprise: req.params.enterpriseId
       })
       const dbDatatoSend = await UserReply.findOne({_id:dbData._id}).populate('replier')
-      console.log(dbDatatoSend)
       return res.status(201).json(dbDatatoSend);
     } catch (err) {
       console.log("ERROR AT POST REPLY - ", err);

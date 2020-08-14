@@ -12,10 +12,13 @@ const SocketIO = require("socket.io");
 const db = require('./config/db')
 const dotenv = require("dotenv");
 const session = require("express-session")
+const cookieParser = require("cookie-parser");
+
 dotenv.config();
 var whitelist = ["http://127.0.0.1:3000", "https://twitter-hd-anurag.herokuapp.com/"];
 var corsOptions = {
-   exposedHeaders: ["x-auth-token"]
+   exposedHeaders: ["x-auth-token"],
+   credentials: true
   //,
   // origin: function (origin, callback) {
   //   console.log(origin)
@@ -42,6 +45,8 @@ app.use(session({
   }
 }
 ))
+
+app.use(cookieParser());
 
 /**
  * MIDDLEWARES
@@ -75,15 +80,15 @@ require("./services/twitterService")(io, app);
 // setUserActivityWebhook(app);
 
 // Redirect to client/build to serve html for any router other than /api
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV !== "production") {
   app.use("/", express.static(path.join(__dirname, "./client/build")));
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
-const port = process.env.PORT || 5000;
-
+const port = process.env.PORT || 3000;
+console.log(process.env.NODE_ENV)
 // Listen to PORT
 server.listen(port, () =>
   console.log(chalk.magenta(`server started on port ${port}`))

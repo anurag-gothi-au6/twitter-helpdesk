@@ -14,7 +14,9 @@ const ENV = process.env.NODE_ENV;
 const SERVER_URL =
   ENV === "production"
     ? "https://twitter-hd-anurag.herokuapp.com"
-    : "http://localhost:5000";
+    : "http://127.0.0.1:3000";
+
+
 
 const SOCKET_URL = "127.0.0.1";
 
