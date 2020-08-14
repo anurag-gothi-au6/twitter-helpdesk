@@ -172,6 +172,7 @@ module.exports = {
       },
       (err, r, body) => {
         try {
+          console.log(err,body)
           if (err) {
             console.log('errorData')
             return res.send(500, { message: err.message });
