@@ -26,6 +26,7 @@ var corsOptions = {
   }
 };
 
+
 //create express application
 const app = express();
 app.use(session({
