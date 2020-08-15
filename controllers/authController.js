@@ -20,10 +20,10 @@ module.exports = {
       const checkUser = await User.findOne({ email: email })
       const checkEnterprise = await Enterprise.findOne({ enterpriseName: enterpriseName })
       if (checkUser) {
-        throw new Error('User Already Exists');
+        throw new Error('Email Already Exists');
       }
       if (checkEnterprise) {
-        throw new Error('Enterprise Already Exists')
+        throw new Error('Enterprise Name Already Exists')
       }
       const enterprise = await Enterprise.create({ enterpriseName: enterpriseName })
       console.log('password', password)
@@ -41,7 +41,7 @@ module.exports = {
       res.status(200).json({ user: newUser })
     }
     catch (err) {
-      res.status(400).json({ error: err.message })
+      res.json({ error: err.message })
     }
   },
   login: async (req, res) => {
@@ -84,7 +84,7 @@ module.exports = {
       }
     } catch (error) {
       console.log(error)
-      res.status(400).json({ error: error.message })
+      res.json({ error: error.message })
     }
   },
 

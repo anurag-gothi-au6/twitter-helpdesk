@@ -4,7 +4,7 @@ import { ListItem, Avatar } from "@material-ui/core";
 import moment from "moment";
 
 function ChatItem(props) {
-  let { style, item } = props;
+  let { item } = props;
   console.log(props)
   const isUser = props.user.screen_name === item.user.screen_name;
   const textArr = item.text.split(' ')
@@ -33,7 +33,7 @@ function ChatItem(props) {
         <span>
           <b className="user-name" style={{fontWeight:'bolder'}}>{item.user.name}</b>
           <b className="created-at" style={{ fontSize: "0.8em",marginLeft:'10px' }}>
-          🕑 {moment(item.created_at).fromNow()}
+          <span role="img" aria-label="">🕑 </span>{moment(item.created_at).fromNow()}
           </b> 
           {item.replier?<p>(Agent:{item.replier.name})</p>:''}
           <p

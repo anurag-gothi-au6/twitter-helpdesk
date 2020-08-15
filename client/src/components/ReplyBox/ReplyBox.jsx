@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Divider, TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 
 export default function ReplyBox(props) {
   let { reply, handleInputChange, postReplies, replyButtonDisabled } = props;

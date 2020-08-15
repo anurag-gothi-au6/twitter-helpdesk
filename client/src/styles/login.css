@@ -105,3 +105,10 @@
 		 text-align: right !important;
 	}
 }
+.red{
+	color: red;
+	width: 20rem;
+}
+.redInput{
+	border: 2px solid red !important;
+}

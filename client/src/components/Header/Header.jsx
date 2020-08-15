@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
   makeStyles,
-  OutlinedInput,
 } from "@material-ui/core";
-import Icon from "@mdi/react";
-import { mdiTwitter } from "@mdi/js";
 import { apiUrl } from "../../shared/vars";
 import axios from "axios";
 import "../../styles/dashboard.css";
