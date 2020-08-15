@@ -1,7 +1,7 @@
 {
-  "name": "richpanel-assess",
+  "name": "twitter-helpdesk",
   "version": "1.0.0",
-  "description": "RichPanel Assessment",
+  "description": "Twitter helpdesk",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
