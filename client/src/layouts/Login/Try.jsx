@@ -57,7 +57,7 @@ class Login extends Component {
       } else if (
         name.length >= 1 &&
         enterpriseName.length >= 1 &&
-        email.length > 5 &&
+        email.length > 0 &&
         password.length >= 1 &&
         confirmPassword.length >= 1
       ) {
@@ -112,7 +112,7 @@ class Login extends Component {
         this.setState({ isLoading: false,currentError:'' });
         return;
       }
-      if (email.length > 4 && password.length > 1) {
+      if (email.length > 0 && password.length > 1) {
         if (!/.+@.+\.[A-Za-z]+$/.test(email)) {
           this.setState({ emailError: `Invalid email` });
           this.setState({ isLoading: true });
@@ -248,7 +248,7 @@ class Login extends Component {
               <legend>Create Account</legend>
               <ul>
                 <li>
-                  <label htmlFor="username">Enterprise name:</label>
+                  <label htmlFor="username">* Enterprise name:</label>
                   <input
                     type="text"
                     onChange={this.handleChange}
@@ -266,7 +266,7 @@ class Login extends Component {
                   />
                 </li>
                 <li>
-                  <label htmlFor="username">name:</label>
+                  <label htmlFor="username">* name:</label>
                   <input
                     type="text"
                     onChange={this.handleChange}
@@ -281,7 +281,7 @@ class Login extends Component {
                   />
                 </li>
                 <li>
-                  <label htmlFor="email">Email:</label>
+                  <label htmlFor="email">* Email:</label>
                   <input
                     type="email"
                     name="email"
@@ -296,7 +296,7 @@ class Login extends Component {
                   />
                 </li>
                 <li>
-                  <label htmlFor="password">Password:</label>
+                  <label htmlFor="password">* Password:</label>
                   <input
                     type="password"
                     name="password"
@@ -312,7 +312,7 @@ class Login extends Component {
                   />
                 </li>
                 <li>
-                  <label htmlFor="confirmPassword">Confirm password:</label>
+                  <label htmlFor="confirmPassword">* Confirm password:</label>
                   <input
                     type="password"
                     name="confirmPassword"
@@ -375,7 +375,7 @@ class Login extends Component {
               <legend>Log In</legend>
               <ul>
                 <li>
-                  <label htmlFor="email">Email:</label>
+                  <label htmlFor="email">* Email:</label>
                   <input
                     type="email"
                     id="email"
@@ -390,7 +390,7 @@ class Login extends Component {
                   />
                 </li>
                 <li>
-                  <label htmlFor="password">Password:</label>
+                  <label htmlFor="password">* Password:</label>
                   <input
                     type="password"
                     id="password"
