@@ -117,6 +117,7 @@ module.exports = {
       const payload = {
         ...req.body
       };
+      console.log(payload)
       req.token = sharedFunctions.createToken({ oauth_token: payload.oauth_token, oauth_verifier: payload.oauth_verifier, oauth_token_secret: payload.oauth_token_secret, user_id: payload.user_id });
       console.log(payload.helpdeskUser.enterprise)
       const enterprise = await Enterprise.findOne({ _id: payload.helpdeskUser.enterprise })

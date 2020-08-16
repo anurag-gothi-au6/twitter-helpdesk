@@ -30,7 +30,7 @@ module.exports = function (req, res, next) {
       }
     }
   })
-  console.log(payload)
+  // console.log(payload)
 
   if (!req || !req.headers || !req.headers["x-auth-token"]) {
     return res.status(401).end();

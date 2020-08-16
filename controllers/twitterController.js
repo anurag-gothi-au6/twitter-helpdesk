@@ -8,13 +8,14 @@ module.exports = {
       user.oauth_token,
       user.oauth_token_secret
     ).getUserDetails();
-    const { name, location, description, screen_name, followers_count } = data;
+    const { name, location, description, screen_name, followers_count,profile_image_url } = data;
     let userInfo = {
       name,
       location,
       description,
       screen_name,
-      followers_count
+      followers_count,
+      profile_image_url
     };
     return res.json(userInfo);
   },
