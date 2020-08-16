@@ -18,6 +18,7 @@ const userReducer = (state = initialState, action) => {
             return {...state,user:payload}
         case HELPDESK_USER:
             window.localStorage.setItem("user",JSON.stringify(payload))
+            window.localStorage.setItem("loggedInTime",String(new Date()))
             return {...state,helpdeskUser:payload}
         default:
             return { ...state };

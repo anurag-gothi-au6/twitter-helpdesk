@@ -5,7 +5,6 @@ import moment from "moment";
 
 function ChatItem(props) {
   let { item } = props;
-  console.log(props)
   const isUser = props.user.screen_name === item.user.screen_name;
   const textArr = item.text.split(' ')
   return (

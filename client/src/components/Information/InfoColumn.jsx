@@ -11,7 +11,7 @@ import InfoCard from "./InfoCard";
 
 export default function InfoColumn(props) {
   const { selectedTweet } = props;
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState("");
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -25,37 +25,46 @@ export default function InfoColumn(props) {
         flexDirection: "column",
         alignItems: "center",
         backgroundColor: "white",
-        border:'1px solid #B0B0B0',
-
       }}
+      elevation='0'
     >
       {selectedTweet && (
         <div style={{ width: "100%" }}>
           <InfoCard selectedTweet={selectedTweet} />
-
+        <div style={{marginTop:expanded === "panel1"?'30%':'70%'}}>
           <ExpansionPanel
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
+            elevation='0'
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >
-              <Typography>Description</Typography>
+              <Typography>Tasks</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <span
-                style={{
-                  color: "#747880",
-                  lineHeight: "1.5em",
-                  fontSize: "1.1em"
-                }}
-              >
-                {selectedTweet.user.description}
-              </span>
+            <div className="details">
+            <div className="row"  >
+        <input type='checkbox' value='' style={{marginRight:'10px'}}></input>
+          <b className="black" style={{color:'black',fontWeight:'bold'}}>Solved Query</b>
+        </div>
+        <div className="row"  style={{marginTop:'20px'}}>
+        <input type='checkbox' value='' style={{marginRight:'10px'}}></input>
+        <b className="black" style={{color:'black',fontWeight:'bold'}}>Feedback received</b>
+        </div>
+        <div className="row"  style={{marginTop:'20px'}}>
+        <input type='checkbox' value='' style={{marginRight:'10px'}}></input>
+        <b className="black" style={{color:'black',fontWeight:'bold'}}>More support required</b>
+        </div>
+        <div className="row"  style={{marginTop:'20px'}}>
+          <b className="grey" style={{color:'grey',fontWeight:'bolder',textDecoration:'underline'}}> All tasks</b>
+        </div>
+      </div>
             </ExpansionPanelDetails>
           </ExpansionPanel>
+          </div>
         </div>
       )}
     </Paper>

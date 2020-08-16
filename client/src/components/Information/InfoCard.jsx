@@ -12,8 +12,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7)
+    width: theme.spacing(15),
+    height: theme.spacing(15)
   }
 }));
 export default function InfoCard(props) {
@@ -22,6 +22,7 @@ export default function InfoCard(props) {
   const classes = useStyles();
 
   return (
+    <div>
     <div
       style={{
         width: "100%",
@@ -34,35 +35,42 @@ export default function InfoCard(props) {
       <div className={classes.root}>
         <Avatar
           alt={selectedTweet.user.name}
-          src={selectedTweet.user.profile_image_url}
+          src={selectedTweet.user.profile_image_url.replace("normal","400x400")}
           className={classes.large}
         ></Avatar>
       </div>
 
       <div style={styles.screen_name(isRowBased)}>
-        <b style={{ margin: "6px" }}>{selectedTweet.user.name}</b>
-        <span style={{ color: "#747880", margin: "6px" }}>
-          @{selectedTweet.user.screen_name}
-        </span>
+        <h2 style={{ margin: "3px"}}>{selectedTweet.user.name}</h2>
       </div>
-
-      <span style={{ color: "black" }}>
-        {selectedTweet.user.followers_count}{" "}
-        <span style={{ color: "#747880" }}>Followers</span>
+      <span style={{ color: "#50d950",fontSize:'15px' }}>
+        online
       </span>
-
-      <div style={{ display: "flex", flexDirection: "row", margin: "10px" }}>
-        <Icon
+        <div className='contact' style={{margin:'30px'}}>
+      <span style={{backgroundColor:'#efefef',padding:'10px',margin:'10px',border:'0',borderRadius:'20px',width:'50px'}}>📞 Call</span>
+      <span style={{backgroundColor:'#efefef',padding:'10px',margin:'10px',border:'0',borderRadius:'20px',width:'50px'}}>✉ Email</span>
+      </div>
+      </div>
+      <div className="details" style={{margin:'30px',marginTop:'30px'}}>
+        <div className="row"  style={{display:'flex',justifyContent:'space-between'}}>
+          <b className="grey" style={{color:'grey',fontWeight:'bolder'}}>Followers</b>
+          <b className="black" style={{color:'black',fontWeight:'bolder'}}>{selectedTweet.user.followers_count}</b>
+        </div>
+        <div className="row"  style={{display:'flex',justifyContent:'space-between',marginTop:'20px'}}>
+          <b className="grey" style={{color:'grey',fontWeight:'bolder'}}>Username</b>
+          <b className="black" style={{color:'black',fontWeight:'bolder'}}>{selectedTweet.user.screen_name}</b>
+        </div>
+        <div className="row"  style={{display:'flex',justifyContent:'space-between',marginTop:'20px'}}>
+          <b className="grey" style={{color:'grey',fontWeight:'bolder'}}>Location</b>
+          <b className="black" style={{color:'black',fontWeight:'bolder'}}><Icon
           path={mdiMapMarker}
           color={"black"}
           size={0.7}
           style={{ marginRight: 10, padding: 0 }}
-        />
-        <span style={{ color: "#747880" }}>
-          {selectedTweet.user.location
+        /> {selectedTweet.user.location
             ? selectedTweet.user.location
-            : "Unknown"}
-        </span>
+            : "Unknown"}</b>
+        </div>
       </div>
     </div>
   );
@@ -71,7 +79,6 @@ export default function InfoCard(props) {
 const styles = {
   screen_name: isRowBased => ({
     width: "100%",
-    margin: "6px",
     display: "flex",
     flexDirection: isRowBased ? "row" : "column",
     justifyContent: isRowBased ? "center" : "space-around",

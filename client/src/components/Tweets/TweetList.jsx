@@ -6,7 +6,7 @@ import TweetItem from "./TweetItem";
 export default function TweetList(props) {
   let { isLoading, tweets, selectedIndex, handleReply, handleSelected } = props;
   return (
-    <Paper style={{ height: "100%", overflow: "scroll" }}>
+    <div style={{ height: "100%", overflow: "scroll",boxShadow:'0px' }}>
       <List
         style={{
           display: "flex",
@@ -33,6 +33,6 @@ export default function TweetList(props) {
           <span>No mentioned tweets found</span>
         )}
       </List>
-    </Paper>
+    </div>
   );
 }

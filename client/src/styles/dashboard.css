@@ -2,6 +2,11 @@
     color: #8a8888;
     font-weight: bolder;
 }
+.gray1{
+    color: #8a8888;
+    font-weight: bolder;
+    font-size: 15px;
+}
 .right{
     float: right;
 }
@@ -20,19 +25,16 @@
     display:flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 3rem;
     margin-top: 1rem;
 }
 .margin-2{
     margin-top: 2rem;
-    margin-bottom: 1rem;
-    margin-right:3rem;
+    margin-bottom: 2rem;
 }
 .chatHeader{
     display: flex;
     align-items: center;
     padding:10px;
-    background-color:white;
 
 }
 .chatImage{
@@ -42,3 +44,21 @@
     height:30px;
     width:30px;
 }
+
+.online:focus{
+    outline:0
+}
+
+.input-icons img { 
+    position: absolute; 
+} 
+  
+.searchicon { 
+    padding: 10px; 
+    text-align: center; 
+    margin-top: 2px;
+} 
+  
+.input-field { 
+    text-align: center; 
+} 

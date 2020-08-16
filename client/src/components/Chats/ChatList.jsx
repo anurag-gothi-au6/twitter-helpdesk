@@ -6,7 +6,7 @@ import ChatItem from "./ChatItem";
 export default function ChatList(props) {
   let { isLoading, selectedTweet, replies } = props;
   return (
-    <Paper style={{ height: "60vh", overflow: "scroll",boxShadow:0 }}>
+    <Paper style={{ height: "65vh", overflow: "scroll",boxShadow:0 }} elevation='0' >
       
       <List
         style={{
