@@ -13,7 +13,7 @@ export default function TweetList(props) {
           flex: 1,
           flexDirection: "column",
           padding: 0,
-          height: "82vh",
+          height: "80vh",
         }}
       >
         {isLoading ? (
