@@ -3,8 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@mdi/react";
 import { mdiMapMarker } from "@mdi/js";
 import { Avatar } from "@material-ui/core";
-import UseMediaQuery from "../../hooks/UseMediaQuery";
-
+import UseMediaQuery from "../../mediaQuery/useMediaQuery"
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
