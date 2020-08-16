@@ -6,14 +6,14 @@ import TweetItem from "./TweetItem";
 export default function TweetList(props) {
   let { isLoading, tweets, selectedIndex, handleReply, handleSelected } = props;
   return (
-    <div style={{ height: "100%", overflow: "scroll",boxShadow:'0px' }}>
+    <div style={{ height: "100%", overflow: "scroll", boxShadow: "0px" }}>
       <List
         style={{
           display: "flex",
           flex: 1,
           flexDirection: "column",
           padding: 0,
-          height:'82vh'
+          height: "82vh",
         }}
       >
         {isLoading ? (
@@ -26,7 +26,7 @@ export default function TweetList(props) {
               key={i.toString()}
               tweet={o}
               selectedIndex={selectedIndex}
-              handleReply={s => handleReply(s)}
+              handleReply={(s) => handleReply(s)}
               handleSelected={(id_str, o) => handleSelected(id_str, o)}
             ></TweetItem>
           ))
